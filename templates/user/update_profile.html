@@ -1,0 +1,123 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit-Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Edit Your Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group row">
+            <label for="{{ username.id_for_label }}" class="col-sm-2 col-form-label">UserName</label>
+            <div class="col-sm-10">
+                {{ form.username|as_crispy_field }}
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="{{ form.first_name.id_for_label }}" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+                {{ form.first_name|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.last_name.id_for_label }}" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+                {{ form.last_name|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.date_of_birth.id_for_label }}" class="col-sm-2 col-form-label">Date of Birth</label>
+            <div class="col-sm-10">
+                {{ form.date_of_birth|as_crispy_field }}
+            </div>
+        </div>
+
+        <fieldset class="form-group row">
+            <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+            <div class="col-sm-10">
+                {{ form.gender|as_crispy_field }}
+            </div>
+        </fieldset>
+
+        <div class="form-group row">
+            <label for="{{ form.location.id_for_label }}" class="col-sm-2 col-form-label">Location</label>
+            <div class="col-sm-10">
+                {{ form.location|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.nationality.id_for_label }}" class="col-sm-2 col-form-label">Nationality</label>
+            <div class="col-sm-10">
+                {{ form.nationality|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.education.id_for_label }}" class="col-sm-2 col-form-label">Education</label>
+            <div class="col-sm-10">
+                {{ form.education|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.languages.id_for_label }}" class="col-sm-2 col-form-label">Languages</label>
+            <div class="col-sm-10">
+                {{ form.languages|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.interests.id_for_label }}" class="col-sm-2 col-form-label">Interests</label>
+            <div class="col-sm-10">
+                {{ form.interests|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.bio.id_for_label }}" class="col-sm-2 col-form-label">Bio</label>
+            <div class="col-sm-10">
+                {{ form.bio|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.profile_picture.id_for_label }}" class="col-sm-2 col-form-label">Profile Picture</label>
+            <div class="col-sm-10">
+                {% if form.instance.profile_picture %}
+                    <div class="mb-3">
+                        <img src="{{ form.instance.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail" width="150">
+                    </div>
+                {% endif %}
+                {{ form.profile_picture|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="{{ form.social_media_links.id_for_label }}" class="col-sm-2 col-form-label">{{ form.social_media_links.label }}</label>
+            <div class="col-sm-10">
+                {{ form.social_media_links|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="cancel" class="btn btn-primary">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

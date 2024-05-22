@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Meyawo landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Profilo</title>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/themify-icons/css/themify-icons.css'%}">
+    <!-- Bootstrap + Meyawo main styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/meyawo.css'%}">
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+    <!-- page header -->
+    <header id="home" class="header">
+        <div class="overlay"></div>
+        <div class="header-content container">
+            <h1 class="header-title">
+                <span class="up">HI!</span>
+                <span class="down">Welcome to Profilo</span>
+            </h1>
+            <p class="header-subtitle">create your won profile</p>
+            <a href="{% url 'signin' %}"><button class="btn btn-primary">Sign In</button></a>
+            <a href="{% url 'signup' %}"><button class="btn btn-primary">Sign Up</button></a>
+        </div>
+    </header><!-- end of page header -->
+
+    <!-- core  -->
+    <script src="{% static 'assets/vendors/jquery/jquery-3.4.1.js'%}"></script>
+    <script src="{% static 'assets/vendors/bootstrap/bootstrap.bundle.js'%}"></script>
+
+    <!-- bootstrap 3 affix -->
+    <script src="{% static 'assets/vendors/bootstrap/bootstrap.affix.js'%}"></script>
+
+    <!-- Meyawo js -->
+    <script src="{% static 'assets/js/meyawo.js'%}"></script>
+
+</body>
+
+</html>
