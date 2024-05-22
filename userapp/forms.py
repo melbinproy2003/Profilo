@@ -47,3 +47,6 @@ class CertificationForm(forms.ModelForm):
     class Meta:
         model = Certification
         fields = ['name', 'issuer', 'date_issued', 'description', 'certificate_picture']
+        widgets = {
+            'date_issued': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD', 'type': 'date'})
+        }

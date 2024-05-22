@@ -77,7 +77,7 @@ def logout_view(request):
         del request.session['id']
     if 'type' in request.session:
         del request.session['type']
-    return redirect('signin')
+    return redirect('index')
 
 def update_profile(request):
     profile_id = request.session.get('id')
@@ -116,11 +116,20 @@ def projects(request):
         form = ProjectForm(request.POST)
         if form.is_valid():
             project = form.save(commit=False)
-            project.profile = request.user.profile
-            project.save()
-            return redirect('projects')
+            try:
+                profile_id = request.session.get('id')
+                if not profile_id:
+                    return redirect('login')
+
+                profile = Profile.objects.get(id=profile_id)
+                project.profile = profile
+                project.save()
+                return redirect('projects')
+            except Profile.DoesNotExist:
+                form.add_error(None, "Profile not found")
     else:
         form = ProjectForm()
+    
     return render(request, 'user/addproject.html', {'form': form})
 
 def update_project(request, project_id):
@@ -204,11 +213,17 @@ def add_certification(request):
         form = CertificationForm(request.POST, request.FILES)
         if form.is_valid():
             certification = form.save(commit=False)
-            certification.profile = request.session['id']
-            certification.save()
-            return redirect('certification_list')
+            profile_id = request.session.get('id')
+            if profile_id:
+                profile = get_object_or_404(Profile, id=profile_id)
+                certification.profile = profile
+                certification.save()
+                return redirect('certification_list')
+            else:
+                form.add_error(None, "Profile ID not found in session.")
     else:
         form = CertificationForm()
+
     return render(request, 'user/add_certification.html', {'form': form})
 
 def certification_list(request):
