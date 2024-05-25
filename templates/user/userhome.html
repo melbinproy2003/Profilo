@@ -68,7 +68,7 @@
                             {% else %}
                             <h1 class="mb-4">{{ name }}</h1>
                             {% endif %}
-                            <p class="mb-4">{{ profile.bio|default:"No bio available" }}</p>
+                            <p class="mb-4">{{ profile.education|default:" " }}</p>
                                 <ul>
                                     {% for link, platform in social_media_platforms %}
                                       <a href="https://{{ link }}" target="blank" ><i class="icon-{{ platform }}"></i></a>

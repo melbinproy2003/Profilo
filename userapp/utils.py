@@ -9,6 +9,7 @@ SOCIAL_MEDIA_DOMAINS = {
     "pinterest": ["pinterest.com", "pin.it"],
     "tiktok": ["tiktok.com"],
     "github": ["github.com"],
+    "whatsapp":["wa.me"],
 }
 
 def get_domain_from_url(url):
