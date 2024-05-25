@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+  <style>
+    .user-card {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+      width: 200px;
+    }
+    .user-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%; /* Circle for photo */
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>User List</h1>
+  {% for p in profiles %}
+  <a href="{% url 'website' profile_id=p.id %}">
+  <div class="user-card">
+    {% if profile_picture %}
+    <img src="{{ p.profile_picture.url }}" alt="Profile Picture">
+    {% else %}
+    <img src="{% static 'pro.jpeg' %}" alt="User Photo">
+    {% endif %}
+    <p>{{ p.first_name }} {{ p.last_name}}</p>
+    <p>{{ p.date_of_birth }}</p>
+  </div>
+</a>
+  {% endfor %}
+  </body>
+</html>

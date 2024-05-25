@@ -72,6 +72,9 @@
                                     <div class="col-lg-4 col-md-6">
                                         <div class="blog-entry ftco-animate">
                                             <div class="text text-2 pt-2 mt-3">
+                                                {% if project.project_picture %}
+                                                <img src="{{ project.project_picture.url }}" alt="Project Picture">
+                                                {%endif%}
                                                 <h3 class="mb-4">{{ project.title }}</h3>
                                                 <p class="mb-4 description">
                                                     {{ project.description }}

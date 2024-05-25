@@ -46,7 +46,7 @@
 			</nav>
       
 			<div class="colorlib-footer">
-        <a href="">Website</a>
+        <a href="{% url 'website' profile_id=request.session.id %}"><button type="button" class="btn btn-primary">Website</button></a>
 			</div>
 		</aside> <!-- END COLORLIB-ASIDE -->
 		<div id="colorlib-main">
@@ -69,12 +69,11 @@
                             <h1 class="mb-4">{{ name }}</h1>
                             {% endif %}
                             <p class="mb-4">{{ profile.bio|default:"No bio available" }}</p>
-                              <ul>
-                                  {% for link, platform in social_media_platforms %}
+                                <ul>
+                                    {% for link, platform in social_media_platforms %}
                                       <a href="https://{{ link }}" target="blank" ><i class="icon-{{ platform }}"></i></a>
-                                      {% endfor %}
-                                  </ul> 
-                                  
+                                    {% endfor %}
+                                </ul> 
                         </div>
                     </div>
                 </div>

@@ -237,3 +237,37 @@ def remove_certification(request, certification_id):
     certification = get_object_or_404(Certification, id=certification_id)
     certification.delete()
     return redirect('certification_list')
+
+def website(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    projects = Project.objects.filter(profile=profile)
+    certifications = Certification.objects.filter(profile=profile)
+    work_experiences = WorkExperience.objects.filter(profile=profile)
+
+    social_media_links = profile.social_media_links.split(",") if profile.social_media_links else []
+    social_media_platforms = [(link.strip(), identify_social_media_platform(link.strip())) for link in social_media_links]
+    
+    context = {
+        'social_media_platforms': social_media_platforms,
+        'profile': profile,
+        'projects': projects,
+        'certifications': certifications,
+        'workexperiences': work_experiences
+    }
+    return render(request, 'user/website.html', context)
+
+def allprofiles(request):
+    profiles = Profile.objects.all()
+    return render(request, 'user/profileview.html',{'profiles':profiles})
+
+def search(request):
+    query = None
+    profile = None
+    if 'q' in request.GET:
+        query = request.GET.get('q')
+        profile = Profile.objects.filter(Q(first_name=query) | Q(username=query))
+    else:
+        profile = []
+
+    context = {'profile': profile, 'query': query}
+    return render(request, 'user/profileview.html', context)

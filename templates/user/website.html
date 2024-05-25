@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>Glint Studio &mdash; Onepage Website Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Free-Template.co" />
+
+    <link rel="shortcut icon" href="{% static 'web/images/ftco-32x32.png' %}">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'web/fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+    
+    <style>
+        .img-fluid {
+            width: 100%;
+            height: auto;
+        }
+
+        .equal-height {
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .portfolio-item img,
+        .image-popup img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .hero-slider img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        .intro .btn-outline-primary {
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .intro .btn-outline-primary:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
+    <div class="site-navbar-wrap">
+        <div class="site-navbar site-navbar-target js-sticky-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 col-md-4">
+                        <h1 class="my-0 site-logo"><a href="#">{{ profile.username }}<span class="text-primary">.</span> </a></h1>
+                    </div>
+                    <div class="col-6 col-md-8">
+                        <nav class="site-navigation text-right" role="navigation">
+                            <div class="container">
+                                <div class="d-inline-block d-lg-block ml-md-0 mr-auto py-3">
+                                    <a href="#" class="site-menu-toggle js-menu-toggle text-black">
+                                        <span class="icon-menu h3"></span> <span class="menu-text">Menu</span>
+                                    </a>
+                                </div>
+                                <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
+                                    <li><a href="#home-section" class="nav-link">Home</a></li>
+                                    <li><a href="#what-we-do-section" class="nav-link">What I Do</a></li>
+                                    <li><a href="#about-section" class="nav-link">About Me</a></li>
+                                    <li><a href="#portfolio-section" class="nav-link">Portfolio</a></li>
+                                    <li><a href="#gallery-section" class="nav-link">Achievements</a></li>
+                                    <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END .site-navbar-wrap -->
+    
+    <div class="site-blocks-cover" id="home-section">
+        <div class="img-wrap">
+            <div class="owl-carousel slide-one-item hero-slider">
+                <div class="slide">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">  
+                    {% else %}
+                        <img src="{% static 'pro.jpeg' %}" alt="Profile Picture"> 
+                    {% endif %} 
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ml-auto align-self-center">
+                    <div class="intro">
+                        <div class="heading">
+                            <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+                        </div>
+                        <p><a href="#about-section" class="btn btn-primary btn-md">About Me</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END .site-blocks-cover -->
+
+    <div class="site-section" id="what-we-do-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-6 section-title">
+                    <span class="sub-title mb-2 d-block">What I Do</span>
+                    <h2 class="title text-primary">My Experience</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 ml-auto">
+                    <div class="row">
+                        {% for exp in workexperiences %}
+                        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                            <div class="service h-100">
+                                <h3>{{ exp.position }}</h3>
+                                <p>{{ exp.company }} ({{ exp.start_date|date:"Y"}}-{{exp.end_date|date:"Y"}})<p>
+                                <p>{{ exp.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END .site-section -->
+
+    <!-- About me  -->
+    <div class="site-section" id="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-fluid equal-height">
+                    {% else %}
+                        <img src="{% static 'pro.jpeg' %}" alt="Profile Picture" class="img-fluid equal-height"> 
+                    {% endif %}
+                </div>
+                <div class="col-lg-5 ml-auto section-title">
+                    <h2 class="title text-primary mb-3">About Me</h2>
+                    <p class="mb-4">{{ profile.bio }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Location:</strong> {{ profile.location }}</li>
+                        <li><strong>Email:</strong> {{ profile.email }}</li>
+                    </ul>
+                    <p><a href="#portfolio-section" class="btn btn-primary btn-md">My works</a></p>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END .site-section -->
+
+    <div class="site-section" id="portfolio-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-6 section-title">
+                    <span class="sub-title mb-2 d-block">Recent Works</span>
+                    <h2 class="title text-primary">Portfolio</h2>
+                </div>
+            </div>
+            <div class="row">
+                {% for project in projects %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="portfolio-item">
+                        <a href="{{ project.image.url }}" class="image-popup">
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid">
+                            <div class="portfolio-item-content">
+                                <h3>{{ project.title }}</h3>
+                                <span>{{ project.description }}</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div> <!-- END .site-section -->
+
+    <div class="site-section bg-light" id="gallery-section">
+        <div class="container">
+            <div class="row mb-5 justify-content-center">
+                <div class="col-lg-6 section-title text-center">
+                    <span class="sub-title mb-2 d-block">Gallery</span>
+                    <h2 class="title text-primary">Achievements</h2>
+                </div>
+            </div>
+            <div class="row">
+                {% for cf in certifications %}
+                <div class="col-md-4 mb-4">
+                    <div class="gallery-item">
+                      <h3 class="text-center">{{ cf.name }}</h3>
+                      <p>By {{ cf.issuer }}</p>
+                        <p>On {{ cf.date_issued }}</p>
+                        <a href="{{ cf.certificate_picture.url }}" class="image-popup">
+                            <img src="{{ cf.certificate_picture.url }}" alt="Image" class="img-fluid">
+                        </a>
+                        <p>{{ cf.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div> <!-- END .site-section -->
+
+    <div class="site-section" id="contact-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-6 section-title">
+                    <span class="sub-title mb-2 d-block">Get In Touch</span>
+                    <h2 class="title text-primary">Contact Me</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 mb-5">
+                  <h3 class="h5 text-black mb-3">Contact Info</h3>
+                  <p class="mb-0 font-weight-bold">Address</p>
+                  <p class="mb-4">{{ profile.location }}</p>
+                  <p class="mb-0 font-weight-bold">Email Address</p>
+                  <p class="mb-0"><a href="#">{{ profile.email }}</a></p>
+                </div>
+                <div class="col-lg-5 ml-auto">
+                  <h3 class="h5 text-black mb-3">Social Media</h3> 
+                  <ul>
+                    {% for link, platform in social_media_platforms %}
+                        <a href="https://{{ link }}" target="blank" ><i class="icon-{{ platform }}"></i></a>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END .site-section -->
+
+</div> <!-- .site-wrap -->
+
+<script src="{% static 'web/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'web/js/popper.min.js' %}"></script>
+<script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'web/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'web/js/jquery.sticky.js' %}"></script>
+<script src="{% static 'web/js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'web/js/jquery.animateNumber.min.js' %}"></script>
+<script src="{% static 'web/js/jquery.fancybox.min.js' %}"></script>
+<script src="{% static 'web/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'web/js/jquery.easing.1.3.js' %}"></script>
+<script src="{% static 'web/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'web/js/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'web/js/aos.js' %}"></script>
+<script src="{% static 'web/js/main.js' %}"></script>
+
+</body>
+</html>

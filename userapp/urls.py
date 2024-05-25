@@ -20,4 +20,6 @@ urlpatterns = [
     path('certification/', views.certification_list, name='certification_list'),
     path('certification/add/', views.add_certification, name='add_certification'),
     path('certification/remove/<int:pk>/', views.remove_certification, name='remove_certification'),
+    path('website/<int:profile_id>/',views.website,name='website'),
+    path('Profiles/',views.allprofiles,name='profileslists'),
 ]
