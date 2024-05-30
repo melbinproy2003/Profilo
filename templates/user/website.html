@@ -188,20 +188,25 @@
                 </div>
             </div>
             <div class="row">
-                {% for project in projects %}
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="portfolio-item">
-                        <a href="{{ project.image.url }}" class="image-popup">
-                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid">
-                            <div class="portfolio-item-content">
-                                <h3>{{ project.title }}</h3>
-                                <span>{{ project.description }}</span>
-                            </div>
-                        </a>
-                    </div>
+    {% for project in projects %}
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="portfolio-item">
+            <a href="{{ project.link }}" class="image-popup" target='.blank'>
+                {% if project.project_picture %}
+                <img src="{{ project.project_picture.url }}" alt="{{ project.title }}" class="img-fluid">
+                {% else %}
+                <img src="{% static 'default_project_image.jpg' %}" alt="{{ project.title }}" class="img-fluid">
+                {% endif %}
+                <div class="portfolio-item-content">
+                    <h3>{{ project.title }}</h3>
+                    <span>{{ project.description }}</span>
                 </div>
-                {% endfor %}
-            </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
         </div>
     </div> <!-- END .site-section -->
 
@@ -245,7 +250,7 @@
                   <p class="mb-0 font-weight-bold">Address</p>
                   <p class="mb-4">{{ profile.location }}</p>
                   <p class="mb-0 font-weight-bold">Email Address</p>
-                  <p class="mb-0"><a href="#">{{ profile.email }}</a></p>
+                  <p class="mb-0"><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></p>
                 </div>
                 <div class="col-lg-5 ml-auto">
                   <h3 class="h5 text-black mb-3">Social Media</h3> 

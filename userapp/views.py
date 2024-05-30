@@ -113,7 +113,7 @@ def profile_detail(request, profile_id):
 # Insert project
 def projects(request):
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)  # Include request.FILES
         if form.is_valid():
             project = form.save(commit=False)
             try:
@@ -132,11 +132,12 @@ def projects(request):
     
     return render(request, 'user/addproject.html', {'form': form})
 
+
 def update_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
 
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, request.FILES, instance=project)  # Include request.FILES
         if form.is_valid():
             form.save()
             return redirect('projects')
@@ -144,6 +145,7 @@ def update_project(request, project_id):
         form = ProjectForm(instance=project)
 
     return render(request, 'user/addproject.html', {'form': form, 'project': project})
+
 
 # List projects
 def listprojects(request):

@@ -1,42 +1,116 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User List</title>
-  <style>
-    .user-card {
-      display: inline-block;
-      margin: 10px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      text-align: center;
-      width: 200px;
-    }
-    .user-card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%; /* Circle for photo */
-      margin-bottom: 10px;
-    }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Meyawo landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Profilo</title>
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/themify-icons/css/themify-icons.css' %}">
+    <!-- Bootstrap + Meyawo main styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/meyawo.css' %}">
+    <style>
+        .navbar {
+            background: transparent !important;
+            transition: background-color 0.5s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        .user-card {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            width: 200px;
+        }
+
+        .user-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-<body>
-  <h1>User List</h1>
-  {% for p in profiles %}
-  <a href="{% url 'website' profile_id=p.id %}">
-  <div class="user-card">
-    {% if profile_picture %}
-    <img src="{{ p.profile_picture.url }}" alt="Profile Picture">
-    {% else %}
-    <img src="{% static 'pro.jpeg' %}" alt="User Photo">
-    {% endif %}
-    <p>{{ p.first_name }} {{ p.last_name}}</p>
-    <p>{{ p.date_of_birth }}</p>
-  </div>
-</a>
-  {% endfor %}
-  </body>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" style="background-image: url('{% static 'header.jpg' %}'); background-size: cover; background-position: center;">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="{% url 'index' %}">Profilo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile_detail' user.id %}">My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signin' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- user list section -->
+    <section class="container mt-5"><br>
+        <div class="row">
+            {% for p in profiles %}
+            {% if p.profile_picture %}
+            <div class="col-md-4">
+                <a href="{% url 'website' profile_id=p.id %}">
+                    <div class="user-card">
+                        {% if p.profile_picture %}
+                        <img src="{{ p.profile_picture.url }}" alt="Profile Picture">
+                        {% else %}
+                        <img src="{% static 'pro.jpeg' %}" alt="User Photo">
+                        {% endif %}
+                        <p>{{ p.first_name }} {{ p.last_name }}</p>
+                        <p>{{ p.education }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- core  -->
+    <script src="{% static 'assets/vendors/jquery/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'assets/vendors/bootstrap/bootstrap.bundle.js' %}"></script>
+
+    <!-- bootstrap 3 affix -->
+    <script src="{% static 'assets/vendors/bootstrap/bootstrap.affix.js' %}"></script>
+
+    <!-- Meyawo js -->
+    <script src="{% static 'assets/js/meyawo.js' %}"></script>
+    <script>
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+    </script>
+</body>
+
 </html>

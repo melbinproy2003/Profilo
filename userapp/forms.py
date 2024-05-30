@@ -27,10 +27,11 @@ class ProfileForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title', 'description','project_picture', 'link']
+        fields = ['title', 'description', 'project_picture', 'link']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Enter project title', 'class': 'form-control'}),
             'description': forms.Textarea(attrs={'placeholder': 'Enter project description', 'class': 'form-control'}),
+            'project_picture': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
             'link': forms.URLInput(attrs={'placeholder': 'Enter project link', 'class': 'form-control'}),
         }
 

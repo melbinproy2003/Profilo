@@ -31,7 +31,7 @@ class Project(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='projects')
     title = models.CharField(max_length=200)
     description = models.TextField()
-    project_picture = models.ImageField(upload_to='project_picture/', blank=True, null=True)
+    project_picture = models.ImageField(upload_to='projects/', blank=True, null=True)
     link = models.URLField(blank=True, null=True)
 
     def __str__(self):
